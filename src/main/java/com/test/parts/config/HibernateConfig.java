@@ -24,7 +24,7 @@ public class HibernateConfig {
 	private ApplicationContext context;
 
 	@Bean
-	private LocalSessionFactoryBean getSessionFactory() {
+	public LocalSessionFactoryBean getSessionFactory() {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
 		factoryBean.setAnnotatedClasses(Parts.class);
@@ -32,8 +32,8 @@ public class HibernateConfig {
 	}
 
     @Bean
-    public FilterRegistrationBean encodingFilter() {
-        FilterRegistrationBean bean = new FilterRegistrationBean();
+    public FilterRegistrationBean<CharacterEncodingFilter> encodingFilter() {
+        FilterRegistrationBean<CharacterEncodingFilter> bean = new FilterRegistrationBean<CharacterEncodingFilter>();
         bean.setFilter(new CharacterEncodingFilter());
         bean.addInitParameter("encoding", "UTF-8");
         bean.addInitParameter("forceEncoding", "true");
